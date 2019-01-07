@@ -95,6 +95,11 @@ void setup() {
 
 void loop() {
 
+	/**
+	 * actually found out there is no need to introduce update in loop(),
+	 * problem was more in downloading from azure. also the static website is not working.
+	 *
+	 */
 	if (updating) {
 
 		t_httpUpdate_return ret;
@@ -196,8 +201,6 @@ void messageReceived(String &topic, String &payload) {
 //			delay(1000);
 //		}
 //		Serial.println(" Done.");
-
-
 
 	}
 
