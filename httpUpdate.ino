@@ -5,6 +5,11 @@
  *
  */
 
+#define USE_SERIAL Serial
+#define DEBUG_ESP_HTTP_CLIENT
+#define DEBUG_ESP_PORT Serial
+#define DEBUG_HTTPCLIENT(...) DEBUG_ESP_PORT.printf( __VA_ARGS__ )
+
 #include <Arduino.h>
 
 #include <ESP8266WiFi.h>
@@ -16,8 +21,6 @@
 #include <MQTT.h>
 #include <ArduinoJson.h>
 #include "config.h" //must create one
-
-#define USE_SERIAL Serial
 
 int updateFrequencySec = 1;
 
@@ -31,6 +34,18 @@ MQTTClient iotHubMqttClient = MQTTClient(512); //really important to set buffer 
 bool updating = false;
 String firmwareUrl = "";
 String urlThumbprint = "";
+
+void connectWifi() {
+	WiFi.begin(secondary_ssid, secondary_password);
+	while (WiFi.status() != WL_CONNECTED) {
+		delay(500);
+		Serial.print(".");
+	}
+	Serial.print("WiFi connected to ");
+	Serial.println(secondary_ssid);
+	Serial.println("IP address: ");
+	Serial.println(WiFi.localIP());
+}
 
 void setup() {
 
@@ -53,17 +68,7 @@ void setup() {
 
 	WiFi.mode(WIFI_STA);
 
-	WiFi.begin(secondary_ssid, secondary_password);
-	while (WiFi.status() != WL_CONNECTED) {
-		delay(500);
-		Serial.print(".");
-	}
-
-	Serial.print("WiFi connected to ");
-	Serial.println(secondary_ssid);
-	Serial.println("IP address: ");
-	Serial.println(WiFi.localIP());
-
+	connectWifi();
 	//setup iot hub MQTT transport
 	bool connect = false;
 	iotHubMqttClient.begin(iotHubDomain, 8883, espClient);
@@ -102,11 +107,16 @@ void loop() {
 	 */
 	if (updating) {
 
+		connectWifi();
+
 		t_httpUpdate_return ret;
 
-		if (urlThumbprint.length() > 0) {
+		if ( firmwareUrl.startsWith("https://") ) {
 			Serial.println(urlThumbprint);
-			ret = ESPhttpUpdate.update(firmwareUrl, "", urlThumbprint);
+
+			ESP8266HTTPUpdate theUpdate(50000);
+			ret = theUpdate.update(firmwareUrl, "", urlThumbprint);
+
 
 		} else {
 			ret = ESPhttpUpdate.update(firmwareUrl);
@@ -190,17 +200,28 @@ void messageReceived(String &topic, String &payload) {
 		Serial.println(" download firmware from " + firmwareUrl);
 		updating = true;
 
+		Serial.printf("Wifi complete disconnect ");
+
+		while (WiFi.isConnected()){
+			WiFi.disconnect();
+			delay(100);
+		}
+
+
 		//ESPhttpUpdate.setLedPin(ledPin, LOW);
 
 		//t_httpUpdate_return ret = ESPhttpUpdate.update(firmwareUrl, 0x00);
 
-//		Serial.println("Disconnecting MQTT");
-//		while (!iotHubMqttClient.disconnect()) {
-//			Serial.print(".");
-//
-//			delay(1000);
-//		}
-//		Serial.println(" Done.");
+		Serial.println("Disconnecting MQTT");
+		while (!iotHubMqttClient.disconnect()) {
+			Serial.print(".");
+
+			delay(1000);
+		}
+		Serial.println(" Done.");
+
+
+		Serial.printf("Wifi isConnected() = %d ", WiFi.isConnected());
 
 	}
 
