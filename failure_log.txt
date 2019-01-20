@@ -1,3 +1,8 @@
+hecking update flag
+update = false
+
+
+
 ================
 =   ODIN       =
 ================
@@ -12,7 +17,11 @@ mode : sta(5c:cf:7f:3a:33:14)
 add if0
 .....scandone
 state: 0 -> 2 (b0)
-.state: 2 -> 3 (0)
+..state: 2 -> 0 (2)
+reconnect
+......scandone
+state: 0 -> 2 (b0)
+state: 2 -> 3 (0)
 state: 3 -> 5 (10)
 add 0
 aid 1
@@ -20,11 +29,11 @@ cnt
 
 connected with koetjeloe, channel 5
 dhcp client start...
-...ip:192.168.1.71,mask:255.255.255.0,gw:192.168.1.1
+....ip:192.168.1.71,mask:255.255.255.0,gw:192.168.1.1
 .WiFi connected to koetjeloe
 IP address: 
 192.168.1.71
-State:	sending Client Hello (1)
+setup mqtt...State:	sending Client Hello (1)
 State:	receiving Server Hello (2)
 State:	receiving Certificate (11)
 === CERTIFICATE ISSUED TO ===
@@ -85,6 +94,94 @@ incoming: $iothub/twin/res/200/?$rid={14545455} - {
  reading  : 5
 g firmware to version  : 
  download firmware from https://cocostore.blob.core.windows.net/$web/hello_world.bin
+writing UPDATE flag to EEPROM
+rebooting
+state: 5 -> 0 (0)
+rm 0
+del if0
+usl
+
+ ets Jan  8 2013,rst cause:2, boot mode:(3,3)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+vbb28d4a3
+~ld
+
+SDK:2.2.1(cfd48f3)/Core:2.4.2/lwIP:2.0.3(STABLE-2_0_3_RELEASE/glue:arduino-2.4.1-13-g163bb82)/BearSSL:6d1cefc
+Checking update flag
+update = true
+
+
+
+================
+=   ODIN       =
+================
+[SETUP] WAIT 4...
+[SETUP] WAIT 3...
+[SETUP] WAIT 2...
+scandone
+state: 0 -> 2 (b0)
+state: 2 -> 3 (0)
+state: 3 -> 5 (10)
+add 0
+aid 1
+cnt 
+
+connected with koetjeloe, channel 5
+dhcp client start...
+ip:192.168.1.71,mask:255.255.255.0,gw:192.168.1.1
+[SETUP] WAIT 1...
+scandone
+.WiFi connected to koetjeloe
+IP address: 
+192.168.1.71
+setup mqtt...State:	sending Client Hello (1)
+State:	receiving Server Hello (2)
+State:	receiving Certificate (11)
+=== CERTIFICATE ISSUED TO ===
+Common Name (CN):		*.azure-devices.net
+Organization (O):		<Not Part Of Certificate>
+Key Usage:			Digital Signature, Key Encipherment, Data Encipherment
+Subject Alt Name:		*.azure-devices.net *.amqpws.azure-devices.net *.su.management-azure-devices.net 
+=== CERTIFICATE ISSUED BY ===
+Common Name (CN):		Microsoft IT TLS CA 1
+Organization (O):		Microsoft Corporation
+Organizational Unit (OU):	Microsoft IT
+Location (L):			Redmond
+Country (C):			US
+State (ST):			Washington
+Not Before:			Wed May 10 20:11:27 2017
+Not After:			Tue Apr 30 20:11:27 2019
+RSA bitsize:			2048
+Sig Type:			SHA256
+=== CERTIFICATE ISSUED TO ===
+Common Name (CN):		Microsoft IT TLS CA 1
+Organization (O):		Microsoft Corporation
+Organizational Unit (OU):	Microsoft IT
+Location (L):			Redmond
+Country (C):			US
+State (ST):			Washington
+Basic Constraints:		critical, CA:TRUE, pathlen:0
+Key Usage:			critical, Digital Signature, Key Cert Sign, CRL Sign
+=== CERTIFICATE ISSUED BY ===
+Common Name (CN):		Baltimore CyberTrust Root
+Organization (O):		Baltimore
+Organizational Unit (OU):	CyberTrust
+Country (C):			IE
+Not Before:			Fri May 20 12:51:28 2016
+Not After:			Mon May 20 12:51:28 2024
+RSA bitsize:			4096
+Sig Type:			SHA256
+State:	receiving Certificate Request (13)
+State:	receiving Server Hello Done (14)
+State:	sending Certificate (11)
+State:	sending Client Key Exchange (16)
+State:	sending Finished (16)
+State:	receiving Finished (16)
+last error status: 0
 6a 81 2e f9 92 86 c1 48 4e 03 37 47 3a 2d 7d e3 26 dd 62 8b
 [HTTP-Client][begin] url: https://cocostore.blob.core.windows.net/$web/hello_world.bin
 [HTTP-Client][begin] host: cocostore.blob.core.windows.net port: 443 url: /$web/hello_world.bin
@@ -140,8 +237,8 @@ Connection: close
 x-ESP8266-STA-MAC: 5C:CF:7F:3A:33:14
 x-ESP8266-AP-MAC: 5E:CF:7F:3A:33:14
 x-ESP8266-free-space: 2777088
-x-ESP8266-sketch-size: 366416
-x-ESP8266-sketch-md5: dd7486f1d94ad233ec1be47bb1269307
+x-ESP8266-sketch-size: 367008
+x-ESP8266-sketch-md5: 5b2cacb2264d513cd8fd6091c7f677fe
 x-ESP8266-chip-size: 4194304
 x-ESP8266-sdk-version: 2.2.1(cfd48f3)
 x-ESP8266-mode: sketch
@@ -158,8 +255,308 @@ x-ESP8266-mode: sketch
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 ssl->need_bytes=16448 > 6859
 failed to grow plain buffer
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
+[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
@@ -1002,421 +1399,7 @@ pm open,type:2 0
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 [HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
 ##[HTTP-Client][handleHeaderResponse]## timeout since last data received reached 8002 > 8000 [HTTP-Client][returnError] error(-11): read Timeout
 [HTTP-Client][returnError] tcp stop
 [HTTP-Client][end] tcp is closed
-HTTP_UPDATE_FAILD Error (-11): HTTP error: read Timeout6a 81 2e f9 92 86 c1 48 4e 03 37 47 3a 2d 7d e3 26 dd 62 8b
-[HTTP-Client][begin] url: https://cocostore.blob.core.windows.net/$web/hello_world.bin
-[HTTP-Client][begin] host: cocostore.blob.core.windows.net port: 443 url: /$web/hello_world.bin
-[HTTP-Client][begin] httpsFingerprint: 6a 81 2e f9 92 86 c1 48 4e 03 37 47 3a 2d 7d e3 26 dd 62 8b
-State:	sending Client Hello (1)
-State:	receiving Server Hello (2)
-State:	receiving Certificate (11)
-=== CERTIFICATE ISSUED TO ===
-Common Name (CN):		*.blob.core.windows.net
-Organization (O):		<Not Part Of Certificate>
-Key Usage:			Digital Signature, Key Encipherment, Data Encipherment
-Subject Alt Name:		*.blob.core.windows.net 
-=== CERTIFICATE ISSUED BY ===
-Common Name (CN):		Microsoft IT TLS CA 2
-Organization (O):		Microsoft Corporation
-Organizational Unit (OU):	Microsoft IT
-Location (L):			Redmond
-Country (C):			US
-State (ST):			Washington
-Not Before:			Thu Nov  9 05:42:30 2017
-Not After:			Sat Nov  9 05:42:30 2019
-RSA bitsize:			2048
-Sig Type:			SHA256
-=== CERTIFICATE ISSUED TO ===
-Common Name (CN):		Microsoft IT TLS CA 2
-Organization (O):		Microsoft Corporation
-Organizational Unit (OU):	Microsoft IT
-Location (L):			Redmond
-Country (C):			US
-State (ST):			Washington
-Basic Constraints:		critical, CA:TRUE, pathlen:0
-Key Usage:			critical, Digital Signature, Key Cert Sign, CRL Sign
-=== CERTIFICATE ISSUED BY ===
-Common Name (CN):		Baltimore CyberTrust Root
-Organization (O):		Baltimore
-Organizational Unit (OU):	CyberTrust
-Country (C):			IE
-Not Before:			Fri May 20 12:51:57 2016
-Not After:			Mon May 20 12:51:57 2024
-RSA bitsize:			4096
-Sig Type:			SHA256
-State:	receiving Server Hello Done (14)
-State:	sending Client Key Exchange (16)
-State:	sending Finished (16)
-State:	receiving Finished (16)
-[HTTP-Client] connected to cocostore.blob.core.windows.net:443
-[HTTP-Client] sending request header
------
-GET /$web/hello_world.bin HTTP/1.0
-Host: cocostore.blob.core.windows.net
-User-Agent: ESP8266-http-Update
-Connection: close
-x-ESP8266-STA-MAC: 5C:CF:7F:3A:33:14
-x-ESP8266-AP-MAC: 5E:CF:7F:3A:33:14
-x-ESP8266-free-space: 2777088
-x-ESP8266-sketch-size: 366416
-x-ESP8266-sketch-md5: dd7486f1d94ad233ec1be47bb1269307
-x-ESP8266-chip-size: 4194304
-x-ESP8266-sdk-version: 2.2.1(cfd48f3)
-x-ESP8266-mode: sketch
-
------
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-ssl->need_bytes=16448 > 6859
-failed to grow plain buffer
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->available() --> len = 0 
-[HTTP-Client][handleHeaderResponse] size_t len = _tcp->a
+HTTP_UPDATE_FAILD Error (-11): HTTP error: read Timeoutclearing UPDATE flag of EEPROM

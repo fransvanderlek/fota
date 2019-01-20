@@ -84,7 +84,7 @@ void setup() {
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
 
-	if (!updating){
+	if (true){
 
 		Serial.print("setup mqtt...");
 
