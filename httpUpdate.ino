@@ -31,8 +31,8 @@ WiFiClientSecure espClient;
 MQTTClient iotHubMqttClient = MQTTClient(512); //really important to set buffer to sufficient number
 
 bool updating = false;
-static const String firmwareUrl = "https://cocostore.blob.core.windows.net/$web/hello_world.bin";
-static const String urlThumbprint = "6a 81 2e f9 92 86 c1 48 4e 03 37 47 3a 2d 7d e3 26 dd 62 8b";
+String firmwareUrl = "https://cocostore.blob.core.windows.net/$web/hello_world.bin";
+String urlThumbprint = "6a 81 2e f9 92 86 c1 48 4e 03 37 47 3a 2d 7d e3 26 dd 62 8b";
 
 int updateEEPROMAddr = 0;
 static  const uint8_t UPDATE = 1 ;
