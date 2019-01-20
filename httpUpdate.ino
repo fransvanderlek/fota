@@ -17,25 +17,45 @@
 #include <ArduinoJson.h>
 #include "config.h" //must create one
 
+#include <EEPROM.h>
+
 #define USE_SERIAL Serial
 
 int updateFrequencySec = 1;
 
 long lastMessageSentTimestamp;
 
-const int firmwareVersion = 1; // in each new firmware release, this version should be upped so we know not to upgrade after startup
+static const int firmwareVersion = 1; // in each new firmware release, this version should be upped so we know not to upgrade after startup
 
 WiFiClientSecure espClient;
 MQTTClient iotHubMqttClient = MQTTClient(512); //really important to set buffer to sufficient number
 
 bool updating = false;
-String firmwareUrl = "";
-String urlThumbprint = "";
+static const String firmwareUrl = "https://cocostore.blob.core.windows.net/$web/hello_world.bin";
+static const String urlThumbprint = "6a 81 2e f9 92 86 c1 48 4e 03 37 47 3a 2d 7d e3 26 dd 62 8b";
+
+int updateEEPROMAddr = 0;
+static  const uint8_t UPDATE = 1 ;
+static  const uint8_t OPERATE = 0 ;
+
 
 void setup() {
 
 	USE_SERIAL.begin(115200);
 	// USE_SERIAL.setDebugOutput(true);
+
+	EEPROM.begin(512);
+
+
+	Serial.println("Checking update flag");
+	uint8_t doUpdate = EEPROM.read(updateEEPROMAddr);
+
+	if (doUpdate != NULL && doUpdate == UPDATE){
+		updating = true;
+		Serial.println("update = true");
+	} else {
+		Serial.println("update = false");
+	}
 
 	USE_SERIAL.println();
 	USE_SERIAL.println();
@@ -64,32 +84,42 @@ void setup() {
 	Serial.println("IP address: ");
 	Serial.println(WiFi.localIP());
 
-	//setup iot hub MQTT transport
-	bool connect = false;
-	iotHubMqttClient.begin(iotHubDomain, 8883, espClient);
-	iotHubMqttClient.onMessage(messageReceived);
+	if (!updating){
 
-	while (!connect) {
-		connect = iotHubMqttClient.connect(deviceId, mqttUserId, sasToken);
+		Serial.print("setup mqtt...");
 
-		delay(1000);
+		//setup iot hub MQTT transport
+			bool connect = false;
+			iotHubMqttClient.begin(iotHubDomain, 8883, espClient);
+			iotHubMqttClient.onMessage(messageReceived);
 
-		Serial.print("last error status: ");
-		Serial.println(iotHubMqttClient.lastError());
-	};
+			while (!connect) {
+				connect = iotHubMqttClient.connect(deviceId, mqttUserId, sasToken);
 
-	//initTime();
+				delay(1000);
 
-	iotHubMqttClient.subscribe(deviceBoundTopic); //works through device explorer and iot hub gui
+				Serial.print("last error status: ");
+				Serial.println(iotHubMqttClient.lastError());
+			};
 
-	//subscribe to properties update notifications
+			//initTime();
 
-	iotHubMqttClient.subscribe("$iothub/twin/PATCH/properties/desired/#");
+			iotHubMqttClient.subscribe(deviceBoundTopic); //works through device explorer and iot hub gui
 
-	//fetch initial state
-	iotHubMqttClient.subscribe("$iothub/twin/res/#");
+			//subscribe to properties update notifications
 
-	iotHubMqttClient.publish("$iothub/twin/GET/?$rid={14545455}");
+			iotHubMqttClient.subscribe("$iothub/twin/PATCH/properties/desired/#");
+
+			//fetch initial state
+			iotHubMqttClient.subscribe("$iothub/twin/res/#");
+
+			iotHubMqttClient.publish("$iothub/twin/GET/?$rid={14545455}");
+	} else {
+		Serial.print("we are updating, skip setup mqtt.");
+
+	}
+
+
 
 }
 
@@ -113,6 +143,8 @@ void loop() {
 
 		}
 
+
+
 		switch (ret) {
 		case HTTP_UPDATE_FAILED:
 			Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s",
@@ -135,9 +167,18 @@ void loop() {
 			break;
 		}
 
+		Serial.println("clearing UPDATE flag of EEPROM");
+		EEPROM.write( updateEEPROMAddr,OPERATE );
+		EEPROM.commit();
+
+		updating = false;
+
+	} else {
+		iotHubMqttClient.loop();
+
 	}
 
-	iotHubMqttClient.loop();
+
 
 	delay(1000);
 	// wait for WiFi connection
@@ -168,8 +209,8 @@ void messageReceived(String &topic, String &payload) {
 				root["desired"]["updateFrequencySec"].as<int>();
 
 		desiredFirmwareVersion = root["desired"]["firmwareVersion"].as<int>();
-		firmwareUrl = root["desired"]["firmwareUrl"].as<String>();
-		urlThumbprint = root["desired"]["urlThumbPrint"].as<String>();
+		//firmwareUrl = root["desired"]["firmwareUrl"].as<String>();
+		//urlThumbprint = root["desired"]["urlThumbPrint"].as<String>();
 
 	} else if (topic.startsWith("$iothub/twin/PATCH/properties/desired/")) {
 		Serial.println(" update properties received");
@@ -179,8 +220,8 @@ void messageReceived(String &topic, String &payload) {
 
 		desiredFirmwareVersion = root["firmwareVersion"].as<int>();
 
-		firmwareUrl = root["firmwareUrl"].as<String>();
-		urlThumbprint = root["urlThumbPrint"].as<String>();
+		//firmwareUrl = root["firmwareUrl"].as<String>();
+		//urlThumbprint = root["urlThumbPrint"].as<String>();
 	}
 
 	if (desiredFirmwareVersion > firmwareVersion) {
@@ -188,7 +229,14 @@ void messageReceived(String &topic, String &payload) {
 		Serial.println(
 				" Updating firmware to version  : " + desiredFirmwareVersion);
 		Serial.println(" download firmware from " + firmwareUrl);
-		updating = true;
+
+
+		Serial.println("writing UPDATE flag to EEPROM");
+		EEPROM.write(updateEEPROMAddr,UPDATE);
+		EEPROM.commit();
+
+		Serial.println("rebooting");
+		ESP.restart();
 
 		//ESPhttpUpdate.setLedPin(ledPin, LOW);
 
