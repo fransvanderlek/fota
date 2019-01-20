@@ -28,7 +28,7 @@ Working with https on the same endpoint gives read timeout. Does work without MQ
 
 Now found that firmware update with https can work provided:
 1. MQTT is not running
-2. static const strings are used to store firmwareUrl and fingerprint
+2. firmwareUrl and fingerprint must therefore be stored as strings as part of firmware
 
 When only condition 2 is satisfied, the download fails (see branch https://github.com/fransvanderlek/fota/tree/failed_because_mqtt_running )
 
