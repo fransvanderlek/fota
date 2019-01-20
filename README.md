@@ -25,3 +25,11 @@ IoT Hub itself needs to be setup, see also:
 Firmware update proven to work with http blob endpoint:
 * http://cocostore.blob.core.windows.net/$web/hello_world.bin
 Working with https on the same endpoint gives read timeout. Does work without MQTT involved in sketch.
+
+Now found that firmware update with https can work provided:
+1. MQTT is not running
+2. static const strings are used to store firmwareUrl and fingerprint
+
+When only condition 2 is satisfied, the download fails (see branch https://github.com/fransvanderlek/fota/tree/failed_because_mqtt_running )
+
+ 
